@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+ * Copyright (c) 2023 Airbyte, Inc., all rights reserved.
  */
 
 package io.airbyte.workers.helper;
@@ -173,6 +173,7 @@ public class FailureHelper {
 
   public static FailureReason unknownOriginFailure(final Throwable t, final Long jobId, final Integer attemptNumber) {
     return genericFailure(t, jobId, attemptNumber)
+        .withFailureOrigin(FailureOrigin.UNKNOWN)
         .withExternalMessage("An unknown failure occurred");
   }
 

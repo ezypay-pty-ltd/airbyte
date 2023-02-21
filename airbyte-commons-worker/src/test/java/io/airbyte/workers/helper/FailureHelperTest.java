@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+ * Copyright (c) 2023 Airbyte, Inc., all rights reserved.
  */
 
 package io.airbyte.workers.helper;
@@ -177,6 +177,16 @@ class FailureHelperTest {
     final List<FailureReason> failureReasonList =
         FailureHelper.orderedFailures(Set.of(TRACE_FAILURE_REASON_2, TRACE_FAILURE_REASON, EXCEPTION_FAILURE_REASON));
     assertEquals(failureReasonList.get(0), TRACE_FAILURE_REASON);
+  }
+
+  @Test
+  void testUnknownOriginFailure() {
+    final Throwable t = new RuntimeException();
+    final Long jobId = 12345L;
+    final Integer attemptNumber = 1;
+    final FailureReason failureReason = FailureHelper.unknownOriginFailure(t, jobId, attemptNumber);
+    assertEquals(FailureOrigin.UNKNOWN, failureReason.getFailureOrigin());
+    assertEquals("An unknown failure occurred", failureReason.getExternalMessage());
   }
 
 }

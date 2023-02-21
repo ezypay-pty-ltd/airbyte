@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+ * Copyright (c) 2023 Airbyte, Inc., all rights reserved.
  */
 
 package io.airbyte.db.instance.configs;
@@ -41,8 +41,7 @@ public class ConfigsDatabaseTestProvider implements TestDatabaseProvider {
     final Database database = new Database(dslContext);
 
     if (runMigration) {
-      final DatabaseMigrator migrator = new ConfigsDatabaseMigrator(
-          database, flyway);
+      final DatabaseMigrator migrator = new ConfigsDatabaseMigrator(database, flyway);
       migrator.createBaseline();
       migrator.migrate();
     } else {
