@@ -1,4 +1,4 @@
-FROM python:3.10.8-slim-bullseye as base
+FROM python:3.11.7-slim-bullseye as base
 
 # build and load all requirements
 FROM base as builder
